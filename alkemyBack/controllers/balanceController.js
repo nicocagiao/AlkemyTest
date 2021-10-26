@@ -16,7 +16,9 @@ try {
 router.post('/api/add', async (req, res, next) => {
     let objI = {
         tipo : req.body.tipo,
-        valor : req.body.valor
+        valor : req.body.valor,
+        concepto: req.body.concepto,
+        fecha: req.body.fecha
     }
     try {        
         let balance = await balanceModel.insertBalance(objI);
@@ -30,8 +32,8 @@ router.post('/api/add', async (req, res, next) => {
 router.put('/api/update/:id', async (req, res, next) => {
     let objU = {
         id: req.params,
-        tipo : req.body.tipo,
-        valor : req.body.valor
+        valor : req.body.valor,
+        concepto: req.body.concepto,
     }
     try {        
         let balance = await balanceModel.updateBalance(objU);

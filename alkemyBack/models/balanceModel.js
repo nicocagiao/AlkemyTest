@@ -22,9 +22,9 @@ async function insertBalance(obj) {
 
 async function updateBalance(obj) {
     try {
-        let query = "UPDATE balance SET tipo= ?, valor= ? WHERE id= ?";
+        let query = "UPDATE balance SET concepto= ?, valor= ? WHERE id= ?";
         console.log(query)
-        const rows = await pool.query(query, [obj.tipo, obj.valor, obj.id.id]);
+        const rows = await pool.query(query, [obj.concepto, obj.valor, obj.id.id]);
         return rows;
     } catch (error) {
         throw error;
