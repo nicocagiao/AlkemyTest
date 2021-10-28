@@ -35,7 +35,7 @@ export default class APIComponent extends Component {
           <ul>
             {items.map(item => (
               <li key={item.id}>
-                {item.concepto} {item.valor}
+                {item.concepto} {item.valor} {item.tipo} {item.fecha}
               </li>
             ))}
           </ul>

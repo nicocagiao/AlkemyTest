@@ -6,7 +6,7 @@ import APIComponent from './components/fetchApiComponent'
 class App extends Component {
   render() {
     return (     
-        <APIComponent displaytext="API Data"/>
+        <APIComponent/>
 );
   }
 }

@@ -14,11 +14,16 @@ try {
 })
 
 router.post('/api/add', async (req, res, next) => {
+    var today = new Date();
+    var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes();
+    var dateTime = date+' '+time;
+
     let objI = {
         tipo : req.body.tipo,
         valor : req.body.valor,
         concepto: req.body.concepto,
-        fecha: req.body.fecha
+        fecha: dateTime
     }
     try {        
         let balance = await balanceModel.insertBalance(objI);
