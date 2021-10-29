@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Spinner, Container, Col, Row, Table} from 'react-bootstrap'
+import {Spinner, Container, Table, Button} from 'react-bootstrap'
 
-export default class HomeComponent extends Component {
+export default class ListComponent extends Component {
     
   constructor(props) {
       super(props);
@@ -11,6 +11,7 @@ export default class HomeComponent extends Component {
         isLoaded: false,
         items: []
       };
+      this.handleClick = this.handleClick.bind(this);
     }
   
     componentDidMount() {
@@ -24,6 +25,21 @@ export default class HomeComponent extends Component {
             items: response.data.data})
        });
    }
+   
+   handleClick(event) {
+    event.preventDefault();
+    const data = event.target.name;
+    console.log(data)
+    const headers = {
+      'Content-Type': 'application/json',
+    }
+    axios.post('http://localhost:3000/api/add', data, {
+      headers: headers
+    })
+      .then(res=>{
+        console.log(res);
+      })
+  }
 
    render() {
       const { error, isLoaded, items } = this.state;
@@ -36,22 +52,7 @@ export default class HomeComponent extends Component {
       </Spinner>
       </div>;
       } else {
-        let balance = 0
-        items.forEach(function(items){balance += items.valor;});
-
-        return (
-          <>
-          <Container fluid>
-              <Row>
-                <Col>
-                <h1 class="text-center m-5">
-                <p class="text-primary">TOTAL BALANCE</p>
-                <p class="text-success">$ {balance}</p>
-                </h1>
-                </Col>
-              </Row>
-          </Container>
-          
+        return (       
           <Container fluid className="w-75">
           <Table responsive>
           <thead>
@@ -60,7 +61,8 @@ export default class HomeComponent extends Component {
               <th>Type</th>
               <th>Value</th>
               <th>Concept</th>
-              <th>Date</th>            
+              <th>Date</th>
+              <th>Edit</th>            
             </tr>
           </thead>
           <tbody>       
@@ -81,13 +83,15 @@ export default class HomeComponent extends Component {
                 <td>
                  {item.fecha}
                 </td>
+                <td>
+                <Button variant="success" type="button" name="edit" onClick={this.handleClick}>Edit</Button>
+                <Button variant="danger" type="button" name="delete" onClick={this.handleClick}>Delete</Button>                
+                </td>
                 </tr>
               ))}         
           </tbody>
         </Table>
         </Container>
-
-        </>
         );
       }
     }
