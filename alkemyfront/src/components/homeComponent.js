@@ -37,7 +37,14 @@ export default class HomeComponent extends Component {
       </div>;
       } else {
         let balance = 0
-        items.forEach(function(items){balance += items.valor;});
+        items.forEach(function(items){
+          if(items.tipo === "Debit"){
+            balance -= items.valor;
+          }else{
+            balance += items.valor;
+          }
+          
+        });
 
         return (
           <>
@@ -46,7 +53,9 @@ export default class HomeComponent extends Component {
                 <Col>
                 <h1 class="text-center m-5">
                 <p class="text-primary">TOTAL BALANCE</p>
-                <p class="text-success">$ {balance}</p>
+                {balance > 0 && <p class="text-success">$ {balance}</p>}
+                {balance === 0 && <p class="text-info">$ {balance}</p>}
+                {balance < 0 && <p class="text-danger">$ {balance}</p>}
                 </h1>
                 </Col>
               </Row>

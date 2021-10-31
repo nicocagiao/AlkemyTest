@@ -5,7 +5,7 @@ import {Navbar, Container, Nav, Button} from 'react-bootstrap'
 export default class NavComponent extends Component {
    render() {
          return (
-            <Navbar collapseOnSelect expand="lg" bg="light" className="mb-5">
+            <Navbar collapseOnSelect expand="lg" bg="primary" className="mb-5">
         <Container fluid>
         <Navbar.Brand>
             <img src="/logo.svg" width="50%" className="d-inline-block align-top" alt="React Bootstrap logo"/>
